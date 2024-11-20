@@ -1,11 +1,21 @@
+@font-face {
+    font-family: "Josefin Italics";
+    src: url("./Josefin_Sans/JosefinSans-Italic-VariableFont_wght.ttf");
+}
+
+@font-face {
+    font-family: "Josefins";
+    src: url("./Josefin_Sans/static/JosefinSans-LightItalic.ttf");
+}
 .App {
-    color: white;
-    text-align: center;
+    color: black;
+    width: 15rem;
+    height: 15rem;
+    font-family: "Josefin", serif;
+    font-size: 1.5rem;
 }
 
 .container {
-    width: 15rem;
-    height: 15rem;
-    background-color: green;
+    
 
 }
