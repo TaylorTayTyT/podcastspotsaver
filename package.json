@@ -5,6 +5,7 @@
   "dependencies": {
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
+    "@mui/lab": "^6.0.0-beta.15",
     "@mui/material": "^6.1.7",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -26,6 +27,7 @@
     "watch": "webpack -w --config webpack.config.js"
   },
   "devDependencies": {
+    "@types/chrome": "^0.0.283",
     "css-loader": "^7.1.2",
     "mini-css-extract-plugin": "^2.9.2",
     "style-loader": "^4.0.0",

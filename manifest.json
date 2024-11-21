@@ -1,9 +1,21 @@
 {
     "version": "1.0.0",
     "manifest_version": 3,
-    "name": "React Chrome Extension",
+    "name": "Spot Saver",
     "action": {
         "default_popup": "js/index.html",
-        "default_title": "React Chrome Extension"
+        "default_title": "Spot Saver"
+    },
+    "web_accessible_resources": [
+    {
+      "resources": [
+        "js/callback.html"
+      ],
+      "matches": ["<all_urls>"]
     }
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "permissions": ["action", "tabs"]
 }

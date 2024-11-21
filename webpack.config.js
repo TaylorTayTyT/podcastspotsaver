@@ -4,7 +4,8 @@ const CopyPlugin = require("copy-webpack-plugin")
 
 module.exports = {
     entry: {
-        index: "./src/index.tsx"
+        index: "./src/index.tsx",
+        callback: "./src/callback.tsx"
     },
     mode: "production",
     module: {
@@ -35,9 +36,10 @@ module.exports = {
         new CopyPlugin({
             patterns: [
                 { from: "manifest.json", to: "../manifest.json" },
+                { from: "background.js", to: "../background.js" },
             ],
         }),
-        ...getHtmlPlugins(["index"]),
+        ...getHtmlPlugins(["index", "callback"]),
     ],
     resolve: {
         extensions: [".tsx", ".ts", ".js"],
@@ -52,7 +54,7 @@ function getHtmlPlugins(chunks) {
     return chunks.map(
         (chunk) =>
             new HTMLPlugin({
-                title: "React extension",
+                title: "Spot Saver",
                 filename: `${chunk}.html`,
                 chunks: [chunk],
             })
