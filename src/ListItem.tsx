@@ -2,7 +2,7 @@ import "./ListItem.css"
 
 interface ListItemContent {
     title: String,
-    time: String
+    time: number
 }
 
 function ListItem({ title, time }: ListItemContent) {

@@ -9,12 +9,12 @@ chrome.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
         console.log("Hello from the popup!");
 
         const state = Math.random().toString(36).substring(2, 15);
-        const scope = 'user-read-private user-read-email';
+        const scope = 'user-library-read user-read-playback-position';
 
         const body = {
             response_type: "code",
             client_id: env.CLIENT_ID,
-            redirect_uri: env.REDIRECT_URI,
+            redirect_uri: chrome.identity.getRedirectURL(),
             state: state,
             scope: scope
         };
@@ -33,14 +33,34 @@ chrome.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
                     console.error(chrome.runtime.lastError);
                     return;
                 }
-                console.log("ahhh")
                 const urlParams = new URL(redirect_url).searchParams;
                 const code = urlParams.get('code');
                 const state = urlParams.get('state');
 
                 console.log('Authorization Code:', code);
                 console.log('State:', state);
+                fetch('https://accounts.spotify.com/api/token', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'Authorization': 'Basic ' + btoa(env.CLIENT_ID + ':' + env.CLIENT_SECRET)
+                    },
+                    body: 'grant_type=authorization_code&code=' + code + '&redirect_uri=' + chrome.identity.getRedirectURL()
+                })
+                .then((response) => response.json())
+                .then(async (data) => {
+                    console.log(data)
+                    chrome.storage.local.set({ "access_token": data.access_token, "refresh_token": data.refresh_token }, () => {
+                        if (chrome.runtime.lastError) {
+                          console.error("Error saving data:", chrome.runtime.lastError);
+                        } else {
+                          console.log("Access and refresh tokens saved successfully!");
+                        }
+                      });
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
             });
-        //sendResponse({ status: "success", data: "Redirecting to callback" });
     }
 });

@@ -3,7 +3,7 @@ import "./Youtube.css"
 export default function Youtube(){
     return(
         <>
-        <ListItem time={"Youtube Time"} title={"Youtube Title"}/>
+        <ListItem time={1} title={"Youtube Title"}/>
         </>
     )
 }

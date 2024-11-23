@@ -18,7 +18,7 @@
   "background": {
     "service_worker": "background.js"
   },
-  "permissions": ["tabs", "identity"],
+  "permissions": ["tabs", "identity", "storage"],
   "oauth2": {
         "client_id": "5555c90f401e4fa1bf5f980543afca16",
         "scopes": ["user-read-private", "user-read-email"]

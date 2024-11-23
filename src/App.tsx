@@ -1,14 +1,12 @@
 import "./App.css"
-import ListItem from "./ListItem";
-import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
-import { AppBar } from "@mui/material";
 import { useState } from "react";
 import { TabPanel } from "@mui/lab";
 import Spotify from "./Spotify";
 import Youtube from "./Youtube";
+import SpotifyEpisodeContent from "./SpotifyEpisodeContent";
 
 
 function App() {
@@ -29,7 +27,7 @@ function App() {
             <Youtube />
           </TabPanel>
           <TabPanel value="1">
-            <Spotify />
+            <Spotify value = {value}/>
           </TabPanel>
         </TabContext>
         <button onClick={() => {
@@ -37,7 +35,6 @@ function App() {
           chrome.runtime.sendMessage({ type: "greet", payload: "Hello, background!" }, (response: any) => {
             console.log("Response from background:", response);
           });
-
         }}>redirect</button>
       </div >
 
