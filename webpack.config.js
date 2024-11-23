@@ -1,6 +1,6 @@
 const path = require("path");
 const HTMLPlugin = require("html-webpack-plugin");
-const CopyPlugin = require("copy-webpack-plugin")
+const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
     entry: {
@@ -37,6 +37,7 @@ module.exports = {
             patterns: [
                 { from: "manifest.json", to: "../manifest.json" },
                 { from: "background.js", to: "../background.js" },
+                {from: "config.json", to: "../config.json"}
             ],
         }),
         ...getHtmlPlugins(["index", "callback"]),
