@@ -5,8 +5,7 @@ chrome.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
         // Perform some action
 
         const env = await fetch("config.json").then((response) => response.json());
-
-        console.log("Hello from the popup!");
+        
 
         const state = Math.random().toString(36).substring(2, 15);
         const scope = 'user-library-read user-read-playback-position';
@@ -23,7 +22,6 @@ chrome.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
 
         const auth_url = 'https://accounts.spotify.com/authorize?' + params.toString();
         // i think i have to change the redirect uri to chromiumapp https://developer.chrome.com/docs/extensions/reference/api/identity#type-WebAuthFlowDetails
-        console.log(auth_url)
         chrome.identity.launchWebAuthFlow({
             url: auth_url,
             interactive: true
@@ -37,8 +35,6 @@ chrome.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
                 const code = urlParams.get('code');
                 const state = urlParams.get('state');
 
-                console.log('Authorization Code:', code);
-                console.log('State:', state);
                 fetch('https://accounts.spotify.com/api/token', {
                     method: 'POST',
                     headers: {
@@ -49,7 +45,6 @@ chrome.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
                 })
                 .then((response) => response.json())
                 .then(async (data) => {
-                    console.log(data)
                     chrome.storage.local.set({ "access_token": data.access_token, "refresh_token": data.refresh_token }, () => {
                         if (chrome.runtime.lastError) {
                           console.error("Error saving data:", chrome.runtime.lastError);
@@ -57,6 +52,7 @@ chrome.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
                           console.log("Access and refresh tokens saved successfully!");
                         }
                       });
+                    sendResponse({ message: "Success" });
                 })
                 .catch((error) => {
                     console.error(error);

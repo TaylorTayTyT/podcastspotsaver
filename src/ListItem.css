@@ -4,12 +4,15 @@
     height: 3rem;
     font-size: 1rem;
     justify-content: space-around;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
 }
 
 .content_container{
     display: flex;
     border: solid 1px black;
-    width: 60%;
+    width: 80%;
+    padding: 0.25rem;
 }
 
 .title{
@@ -22,4 +25,9 @@
 .time{
     width: 30%;
     margin: auto;
+}
+
+.arrowButton{
+    margin: auto;
+    cursor: pointer;
 }
