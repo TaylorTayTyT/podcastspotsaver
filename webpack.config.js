@@ -37,7 +37,8 @@ module.exports = {
             patterns: [
                 { from: "manifest.json", to: "../manifest.json" },
                 { from: "background.js", to: "../background.js" },
-                {from: "config.json", to: "../config.json"}
+                {from: "config.json", to: "../config.json"},
+                {from: "content-script.js", to: "../content-script.js"}
             ],
         }),
         ...getHtmlPlugins(["index", "callback"]),

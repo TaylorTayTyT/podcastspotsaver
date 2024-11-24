@@ -20,8 +20,8 @@ function ListItem({ title, time }: ListItemContent) {
     return (
         <div className="listItemContainer">
             <div className="content_container">
-                <div className="title">{title.substring(0, 20)}</div>
-                <div className="time">{formattedTime}</div>
+                <div className="title">{title.substring(0, 15)}...</div>
+                <div className="time"><b>{formattedTime}</b></div>
             </div>
             <div className="arrowButton" onClick={() => { }}>
                 <PlayArrow />

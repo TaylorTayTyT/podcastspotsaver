@@ -1,7 +1,11 @@
 chrome.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
     console.log("Received message:", message);
 
-    if (message.type === "greet") {
+    if (message.type === "addYoutube") {
+
+    }
+
+    if (message.type === "auth") {
         // Perform some action
 
         const env = await fetch("config.json").then((response) => response.json());
@@ -60,3 +64,7 @@ chrome.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
             });
     }
 });
+chrome.runtime.onMessageExternal.addListener(
+  function(request, sender, sendResponse) {
+    console.log(sender.mess)
+  });

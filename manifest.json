@@ -18,7 +18,16 @@
   "background": {
     "service_worker": "background.js"
   },
-  "permissions": ["tabs", "identity", "storage"],
+  "content_scripts": [
+   {
+     "matches": ["https://*.youtube.com/*"],
+     "js": ["content-script.js"]
+   }
+ ],
+ "externally_connectable": {
+  "matches": ["https://*.youtube.com/*"]
+},
+  "permissions": ["tabs", "identity", "storage", "activeTab", "scripting"],
   "oauth2": {
         "client_id": "5555c90f401e4fa1bf5f980543afca16",
         "scopes": ["user-read-private", "user-read-email"]
