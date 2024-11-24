@@ -17,6 +17,9 @@ function App() {
     if(e.access_token){
       SetAuthorized(true)
     }
+    else{
+      SetAuthorized(false);
+    }
   })
   const onChange = (e: any, value: string) => {
     SetValue(value)
