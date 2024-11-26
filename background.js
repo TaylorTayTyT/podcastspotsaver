@@ -1,8 +1,17 @@
 chrome.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
     console.log("Received message:", message);
 
-    if (message.type === "addYoutube") {
-
+    if (message.type === "time") {
+        console.log("time: ", message);
+        const tempYoutubeData = await chrome.storage.local.get("youtubeData");
+        tempYoutubeData.youtubeData.forEach((element, idx) => {
+            if(element.title === message.title) {
+                tempYoutubeData.youtubeData.pop(idx);
+            }
+        });
+        tempYoutubeData.youtubeData.push({time: message.time, title: message.title, img: message.img });
+        chrome.storage.local.set(tempYoutubeData);
+        sendResponse({ message: "Success"});
     }
 
     if (message.type === "auth") {
@@ -25,7 +34,6 @@ chrome.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
         const params = new URLSearchParams(body);
 
         const auth_url = 'https://accounts.spotify.com/authorize?' + params.toString();
-        // i think i have to change the redirect uri to chromiumapp https://developer.chrome.com/docs/extensions/reference/api/identity#type-WebAuthFlowDetails
         chrome.identity.launchWebAuthFlow({
             url: auth_url,
             interactive: true
@@ -64,7 +72,8 @@ chrome.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
             });
     }
 });
-chrome.runtime.onMessageExternal.addListener(
-  function(request, sender, sendResponse) {
-    console.log(sender.mess)
-  });
+
+chrome.runtime.onInstalled.addListener(async ()=>{
+    if(await chrome.storage.local.get("youtubeData")) //means the user has storage with this same key
+    chrome.storage.local.set({ "youtubeData": [] });
+})
