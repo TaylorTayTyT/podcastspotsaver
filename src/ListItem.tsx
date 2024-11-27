@@ -1,13 +1,16 @@
 import "./ListItem.css";
 import { PlayArrow } from "@mui/icons-material";
+import SpotifyEpisodeContent from "./SpotifyEpisodeContent";
 
 interface ListItemContent {
     title: String,
-    time: number
+    time: number,
+    videos: SpotifyEpisodeContent[],
+    videoIdx: number
 }
 
-function ListItem({ title, time }: ListItemContent) {
-
+function ListItem({ title, time, videos, videoIdx }: ListItemContent) {
+    //for youtube need to retirve from spoitfy whic video it is
     function formatTime(time: number) {
         const min = Math.floor((time / 1000 / 60) << 0)
         const sec = Math.floor((time / 1000) % 60);

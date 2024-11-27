@@ -4,12 +4,15 @@ chrome.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
     if (message.type === "time") {
         console.log("time: ", message);
         const tempYoutubeData = await chrome.storage.local.get("youtubeData");
-        tempYoutubeData.youtubeData.forEach((element, idx) => {
+        if(!tempYoutubeData.youtubeData) tempYoutubeData.youtubeData = [];
+        else tempYoutubeData.youtubeData.forEach((element, idx) => {
             if(element.title === message.title) {
                 tempYoutubeData.youtubeData.pop(idx);
             }
         });
-        tempYoutubeData.youtubeData.push({time: message.time, title: message.title, img: message.img });
+        console.log("adding");
+        console.log({time: message.time * 1000, title: message.title, img: message.img })
+        tempYoutubeData.youtubeData.push({time: message.time * 1000, title: message.title, img: message.img });
         chrome.storage.local.set(tempYoutubeData);
         sendResponse({ message: "Success"});
     }
