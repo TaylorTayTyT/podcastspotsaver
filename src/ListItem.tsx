@@ -1,6 +1,7 @@
 import "./ListItem.css";
 import { PlayArrow } from "@mui/icons-material";
 import SpotifyEpisodeContent from "./SpotifyEpisodeContent";
+import config from "../config.json";
 
 interface ListItemContent {
     title: string,
@@ -69,7 +70,7 @@ function ListItem({type, title, time, videos, videoIdx }: ListItemContent) {
                 q: title,
                 type: 'video',
                 maxResults: "5",
-                key: "AIzaSyAI7_Gb_KIO343I-mByA_1glgpxSULw988"
+                key: config.YOUTUBE_API
             }
 
             const videos = await fetch("https://youtube.googleapis.com/youtube/v3/search?" + new URLSearchParams(params).toString())
