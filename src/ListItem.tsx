@@ -64,6 +64,30 @@ function ListItem({type, title, time, videos, videoIdx }: ListItemContent) {
         }
         else{
             //coming from spotify, switch to youtube
+            const params = {
+                part: 'snippet',
+                q: title,
+                type: 'video',
+                maxResults: "5",
+                key: "AIzaSyAI7_Gb_KIO343I-mByA_1glgpxSULw988"
+            }
+
+            const videos = await fetch("https://youtube.googleapis.com/youtube/v3/search?" + new URLSearchParams(params).toString())
+            .then((response) => response.json())
+            .then((data) => {
+                return data.items;
+            })
+
+            const videoIds = videos.map((video: any) => {
+                return video.id.videoId;
+            });
+
+            const firstVideo = videoIds[0];
+            
+
+            chrome.runtime.sendMessage({ type: "redirect", videoId: firstVideo, videoTime: (time / 1000).toString() });
+
+            console.log(videoIds);
             
         }
     }

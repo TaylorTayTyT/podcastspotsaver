@@ -76,7 +76,17 @@ chrome.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
     }
 
     if(message.type === "redirect"){
-        console.log("background", message.uri)
+
+        const params = {
+            v: message.videoId, 
+            t: message.videoTime
+        }
+        const youtubeBaseUrl = "https://www.youtube.com/watch?";
+
+        console.log(youtubeBaseUrl + new URLSearchParams(params).toString())
+
+        chrome.tabs.create({ url: youtubeBaseUrl + new URLSearchParams(params).toString()});
+
     }
 });
 

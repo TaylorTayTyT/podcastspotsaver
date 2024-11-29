@@ -28,7 +28,7 @@ try {
     newButton.classList.add("ytp-fullscreen-button");
     newButton.classList.add("ytp-button");
     newButton.addEventListener("click", addVideoSpot);
-    document.querySelector(".ytp-right-controls").appendChild(newButton);
+    document.querySelector(".ytp-right-controls").prepend(newButton);
 } catch (e) {
     console.log(e);
 }
