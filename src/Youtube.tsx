@@ -72,7 +72,7 @@ export default function Youtube() {
             {videos.map((video, idx) =>
                 <div data-video-idx={idx} className="youtubeListItem">
                     <DeleteIcon onClick={deleteSavedYoutubeVideo} className="deleteIcon" />
-                    <ListItem videos={videos} videoIdx={idx} key={video.name} time={video.resume_point} title={video.name} />
+                    <ListItem type={0}videos={videos} videoIdx={idx} key={video.name} time={video.resume_point} title={video.name} />
                 </div>)}
         </>
     )

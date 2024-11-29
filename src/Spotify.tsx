@@ -37,7 +37,7 @@ export default function Spotify({ value }: { value: string }) {
 
   return (
     <>
-      {episodes.map((episode: SpotifyEpisodeContent) => <ListItem time={episode.resume_point} title={episode.name} />)}
+      {episodes.map((episode: SpotifyEpisodeContent, idx: number) => <ListItem type = {1} time={episode.resume_point} title={episode.name} videos={episodes} videoIdx={idx}/>)}
       <div className="reload" onClick={getEpisodes}>
         <ReplayIcon />
       </div>

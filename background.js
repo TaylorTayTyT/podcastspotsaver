@@ -24,7 +24,7 @@ chrome.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
         
 
         const state = Math.random().toString(36).substring(2, 15);
-        const scope = 'user-library-read user-read-playback-position';
+        const scope = 'user-library-read user-read-playback-position user-modify-playback-state';
 
         const body = {
             response_type: "code",
@@ -73,6 +73,10 @@ chrome.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
                     console.error(error);
                 });
             });
+    }
+
+    if(message.type === "redirect"){
+        console.log("background", message.uri)
     }
 });
 
