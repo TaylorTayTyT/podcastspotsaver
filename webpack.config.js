@@ -38,7 +38,11 @@ module.exports = {
                 { from: "manifest.json", to: "../manifest.json" },
                 { from: "background.js", to: "../background.js" },
                 {from: "config.json", to: "../config.json"},
-                {from: "content-script.js", to: "../content-script.js"}
+                {from: "content-script.js", to: "../content-script.js"},
+                {from: "podcastsaverlogo - 16.png", to: "../podcastsaverlogo - 16.png"},
+                {from: "podcastsaverlogo - 48.png", to: "../podcastsaverlogo - 48.png"},
+                {from: "podcastsaverlogo - 128.png", to: "../podcastsaverlogo - 128.png"},
+                {from: "podcastsaverlogo - 32.png", to: "../podcastsaverlogo - 32.png"},
             ],
         }),
         ...getHtmlPlugins(["index", "callback"]),

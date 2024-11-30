@@ -6,6 +6,12 @@
         "default_popup": "js/index.html",
         "default_title": "Spot Saver"
     },
+    "icons": {
+      "16": "podcastsaverlogo - 16.png",
+      "32": "podcastsaverlogo - 32.png",
+      "48": "podcastsaverlogo - 48.png",
+      "128": "podcastsaverlogo - 128.png"
+    },
     "web_accessible_resources": [
     {
       "resources": [
@@ -25,7 +31,7 @@
    }
  ],
  "externally_connectable": {
-  "matches": ["https://*.youtube.com/*"]
+  "matches": ["https://*.youtube.com/watch*"]
 },
   "permissions": ["tabs", "identity", "storage", "activeTab", "scripting"],
   "oauth2": {
