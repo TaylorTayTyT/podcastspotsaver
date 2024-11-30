@@ -22,7 +22,7 @@ function addVideoSpot(){
 
 try {
     const newButton = document.createElement("button");
-    newButton.innerHTML = `<svg height="100%" viewBox="0 0 24 24" fill="" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 22c-4.714 0-7.071 0-8.536-1.465C2 19.072 2 16.714 2 12s0-7.071 1.464-8.536C4.93 2 7.286 2 12 2c4.714 0 7.071 0 8.535 1.464C22 4.93 22 7.286 22 12c0 4.714 0 7.071-1.465 8.535C19.072 22 16.714 22 12 22Zm0-13.75a.75.75 0 0 1 .75.75v2.25H15a.75.75 0 0 1 0 1.5h-2.25V15a.75.75 0 0 1-1.5 0v-2.25H9a.75.75 0 0 1 0-1.5h2.25V9a.75.75 0 0 1 .75-.75Z" fill="#FFCCCC"></path></svg>`;
+    newButton.innerHTML = `<svg width="25" height="75%" fill="none" xmlns="http://www.w3.org/2000/svg"><mask id="a" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="25" height="25"><rect x=".5" y=".5" width="24" height="24" rx="4.5" stroke="#fff"/></mask><g mask="url(#a)"><rect width="25" height="25" rx="5" fill="url(#b)"/></g><rect x="13.184" y="6" width="13" height="1.368" rx=".684" transform="rotate(90 13.184 6)" fill="#fff"/><rect x="19" y="13.184" width="13" height="1.368" rx=".684" transform="rotate(-180 19 13.184)" fill="#fff"/><defs><linearGradient id="b" x1="-10.5" y1="35.5" x2="38.5" y2="0" gradientUnits="userSpaceOnUse"><stop stop-color="red"/><stop offset="1" stop-color="#1ED760"/></linearGradient></defs></svg>`;
     newButton.id = "get-current-time";
     console.log(newButton);
     newButton.classList.add("ytp-fullscreen-button");
