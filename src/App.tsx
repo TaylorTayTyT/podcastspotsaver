@@ -60,7 +60,7 @@ function App() {
             }}>Authenticate</Button>
           </TabPanel>
           <TabPanel value="0">
-            <Youtube />
+            <Youtube checkAuthorization={checkAuthorization} />
           </TabPanel>
           <TabPanel value="1">
             <Spotify value={value} />

@@ -93,4 +93,13 @@ chrome.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
 chrome.runtime.onInstalled.addListener(async ()=>{
     if(await chrome.storage.local.get("youtubeData")) //means the user has storage with this same key
     chrome.storage.local.set({ "youtubeData": [] });
-})
+});
+
+chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
+    if (tab.active && tab.url.includes("youtube.com/watch") && tab.status === "complete") {
+        chrome.scripting.executeScript({
+            target: { tabId: tabId },
+            files: ["content-script.js"]
+        })
+    }
+});

@@ -3,7 +3,7 @@ import "./Youtube.css";
 import SpotifyEpisodeContent from "./SpotifyEpisodeContent";
 import { useState, useEffect, useRef, SetStateAction } from "react";
 import DeleteIcon from '@mui/icons-material/Delete';
-export default function Youtube() {
+export default function Youtube({checkAuthorization}: {checkAuthorization: Function}) {
     const activeVideo = useRef<string | null>(null);
 
     const [videos, SetVideos] = useState<SpotifyEpisodeContent[]>([]);
@@ -34,12 +34,14 @@ export default function Youtube() {
     };
 
     async function deleteSavedYoutubeVideo(e: any) {
-        console.log(activeVideo.current);
         const tempYoutubeData = await chrome.storage.local.get("youtubeData");
         if (tempYoutubeData.youtubeData) {
             const youtubeDataArr = tempYoutubeData.youtubeData
             youtubeDataArr.pop(activeVideo.current);
-            chrome.storage.local.set({ "youtubeData": youtubeDataArr });
+            chrome.storage.local.set({ "youtubeData": youtubeDataArr }, ()=>{
+                checkAuthorization(); 
+            });
+
         }
     }
 

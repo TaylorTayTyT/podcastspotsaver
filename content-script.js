@@ -8,6 +8,7 @@ function getCurrentTimeStamp() {
 }
 const editorExtensionId = "hcojcpcaccjamndobapdoihkmjdmcpll";
 const url = window.location.href;
+console.log("execute")
 
 function addVideoSpot(){
     const currTime = document.querySelector(".html5-main-video").currentTime;
@@ -30,5 +31,6 @@ try {
     newButton.addEventListener("click", addVideoSpot);
     document.querySelector(".ytp-right-controls").prepend(newButton);
 } catch (e) {
+    console.log("podcastspotsaver")
     console.log(e);
 }
