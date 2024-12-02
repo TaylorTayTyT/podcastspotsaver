@@ -7,8 +7,8 @@ import { TabPanel } from "@mui/lab";
 import Spotify from "./Spotify";
 import Youtube from "./Youtube";
 import { Button } from "@mui/material";
-
-
+import animation from "./authGIF.json";
+import Lottie from "lottie-react";
 function App() {
   const [value, SetValue] = useState("2");
   const [authorized, SetAuthorized] = useState(false);
@@ -53,11 +53,13 @@ function App() {
             <Tab id="spotifyTab" label="Spotify" value="1" disabled = {!authorized}/>
 
           </TabList>
-          <TabPanel value="2">
-            <Button onClick={() => {
+          <TabPanel id="authPanel" value="2">
+            <Button id="authButton" onClick={() => {
               // redirect to the spoitfy authentication page
               chrome.runtime.sendMessage({ type: "auth", payload: "Hello, background!" });
             }}>Authenticate</Button>
+            <Lottie animationData={animation} loop autoplay />
+            <span style={{ fontSize: "0.5rem" }}>credit to: <a>https://lottiefiles.com/irfanmunawar</a></span>
           </TabPanel>
           <TabPanel value="0">
             <Youtube checkAuthorization={checkAuthorization} />
