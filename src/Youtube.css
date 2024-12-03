@@ -1,10 +1,6 @@
-.addButton{
-    cursor: pointer;
-}
-
 .deleteIcon{
     position: absolute;
     transform: translate(-25%, -25%);
     opacity: 0;
     cursor: pointer;
-}
+};

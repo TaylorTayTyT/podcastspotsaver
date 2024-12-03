@@ -7,6 +7,7 @@ export default function Youtube({checkAuthorization}: {checkAuthorization: Funct
     const activeVideo = useRef<string | null>(null);
 
     const [videos, SetVideos] = useState<SpotifyEpisodeContent[]>([]);
+    const [warning, SetWarning] = useState("*make sure to have your spotify playing something so the spotify player is active!");
 
     useEffect(() => chrome.storage.onChanged.addListener((changes, areaName) => {
         if (areaName === 'local' && changes.youtubeData) {
@@ -74,7 +75,7 @@ export default function Youtube({checkAuthorization}: {checkAuthorization: Funct
             {videos.map((video, idx) =>
                 <div data-video-idx={idx} className="youtubeListItem">
                     <DeleteIcon onClick={deleteSavedYoutubeVideo} className="deleteIcon" />
-                    <ListItem type={0}videos={videos} videoIdx={idx} key={video.name} time={video.resume_point} title={video.name} />
+                    <ListItem type={0}videos={videos} videoIdx={idx} key={video.name} time={video.resume_point} title={video.name}/>
                 </div>)}
         </>
     )

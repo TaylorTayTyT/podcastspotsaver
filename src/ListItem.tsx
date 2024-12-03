@@ -8,16 +8,17 @@ interface ListItemContent {
     time: number,
     videos: SpotifyEpisodeContent[],
     videoIdx: number,
-    type: number //0 for youtube, 1 for spotify
+    type: number, //0 for youtube, 1 for spotify
 }
 
-function ListItem({type, title, time, videos, videoIdx }: ListItemContent) {
+function ListItem({type, title, time, videos, videoIdx}: ListItemContent) {
     //for youtube need to retirve from spoitfy whic video it is
     function formatTime(time: number) {
-        const min = Math.floor((time / 1000 / 60) << 0)
+        const hrs = Math.floor(time / 1000 / 60 / 60);
+        const min = Math.floor((time / 1000 / 60)) - hrs * 60;
         const sec = Math.floor((time / 1000) % 60);
         const ms = ((time / 1000) % 1).toPrecision(2).split('.')[1];
-        return [min, sec, ms];
+        return [hrs, min, sec, ms];
     }
 
 
@@ -45,7 +46,6 @@ function ListItem({type, title, time, videos, videoIdx }: ListItemContent) {
             console.log(episodes);
             const episode = episodes[0];
             console.log(episode);
-            chrome.runtime.sendMessage({type: "redirect", uri: episode.uri});
 
             const body = {
                 uris: [episode.uri],
@@ -93,8 +93,8 @@ function ListItem({type, title, time, videos, videoIdx }: ListItemContent) {
         }
     }
 
-    const [min, sec, ms] = formatTime(time); 
-    const formattedTime = `${min}:${sec}:${ms}`;
+    const [hrs, min, sec, ms] = formatTime(time); 
+    const formattedTime = `${hrs}:${min}:${sec}`;
     return (
         <div className="listItemContainer">
             <div className="content_container">

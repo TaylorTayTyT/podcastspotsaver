@@ -18,9 +18,10 @@ export default function Spotify({ value }: { value: string }) {
           return data.items
         })
         .catch((error) => {
-          console.error(error)
+          console.log(error)
         })
-
+      
+      if(!savedEpisodes) console.log("could not find a corresponding youtube video")
       const savedEpisodesContentArray = savedEpisodes.map((episode: any) => {
         episode = episode.episode;
         return new SpotifyEpisodeContent(episode.name, episode.resume_point.resume_position_ms, episode.images[0].url)

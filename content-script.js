@@ -6,7 +6,7 @@ function getCurrentTimeStamp() {
         console.log(currTime);
     }
 }
-const editorExtensionId = "hcojcpcaccjamndobapdoihkmjdmcpll";
+let editorExtensionId = "hcojcpcaccjamndobapdoihkmjdmcpll";
 const url = window.location.href;
 console.log("execute")
 
