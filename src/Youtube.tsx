@@ -3,7 +3,7 @@ import "./Youtube.css";
 import SpotifyEpisodeContent from "./SpotifyEpisodeContent";
 import { useState, useEffect, useRef, SetStateAction } from "react";
 import DeleteIcon from '@mui/icons-material/Delete';
-export default function Youtube({checkAuthorization}: {checkAuthorization: Function}) {
+export default function Youtube({ checkAuthorization }: { checkAuthorization: Function }) {
     const activeVideo = useRef<string | null>(null);
 
     const [videos, SetVideos] = useState<SpotifyEpisodeContent[]>([]);
@@ -39,8 +39,8 @@ export default function Youtube({checkAuthorization}: {checkAuthorization: Funct
         if (tempYoutubeData.youtubeData) {
             const youtubeDataArr = tempYoutubeData.youtubeData
             youtubeDataArr.pop(activeVideo.current);
-            chrome.storage.local.set({ "youtubeData": youtubeDataArr }, ()=>{
-                checkAuthorization(); 
+            chrome.storage.local.set({ "youtubeData": youtubeDataArr }, () => {
+                checkAuthorization();
             });
 
         }
@@ -75,8 +75,10 @@ export default function Youtube({checkAuthorization}: {checkAuthorization: Funct
             {videos.map((video, idx) =>
                 <div data-video-idx={idx} className="youtubeListItem">
                     <DeleteIcon onClick={deleteSavedYoutubeVideo} className="deleteIcon" />
-                    <ListItem type={0}videos={videos} videoIdx={idx} key={video.name} time={video.resume_point} title={video.name}/>
-                </div>)}
+                    <ListItem type={0} videos={videos} videoIdx={idx} key={video.name} time={video.resume_point} title={video.name} setWarning={SetWarning}/>
+                </div>)
+            }
+            <div id="warning">{warning}</div>
         </>
     )
 }

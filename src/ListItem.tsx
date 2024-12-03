@@ -9,9 +9,10 @@ interface ListItemContent {
     videos: SpotifyEpisodeContent[],
     videoIdx: number,
     type: number, //0 for youtube, 1 for spotify
+    setWarning?: Function
 }
 
-function ListItem({type, title, time, videos, videoIdx}: ListItemContent) {
+function ListItem({type, title, time, videos, videoIdx, setWarning}: ListItemContent) {
     //for youtube need to retirve from spoitfy whic video it is
     function formatTime(time: number) {
         const hrs = Math.floor(time / 1000 / 60 / 60);
@@ -41,6 +42,14 @@ function ListItem({type, title, time, videos, videoIdx}: ListItemContent) {
                 console.log(data);
                 return data.episodes.items
             })
+            .catch((error) => {
+                if(setWarning){
+                    setWarning("We couldn't find an episode for this on Spotify. Sorry!")
+                }
+            })
+            if(!episodes){
+                return;
+            }
 
             //episodes has 5 items, but for now we will just redirect to the first one
             console.log(episodes);
@@ -60,7 +69,21 @@ function ListItem({type, title, time, videos, videoIdx}: ListItemContent) {
                 },
                 body: JSON.stringify(body)
             }).then((response) => response.json()).then((data) => {
+                console.log("daflskfksajfjsd");
                 console.log(data);
+                if(data && data.error && data.error.reason === "NO_ACTIVE_DEVICE" && setWarning){
+                    setWarning("Something went wrong.Try opening up Spotify on any device and playing anything. This will mark the device as active and we can then play the episode.");
+                }
+                else if(data && !data.error && setWarning){
+                    setWarning(""); 
+                }
+            })
+            .catch((error) => {
+                console.log("errr")
+                console.log(error)
+                if(error.error.reason === "NO_ACTIVE_DEVICE" && setWarning){
+                    setWarning("Try opening up Spotify on any device and playing anything. This will mark the device as active and we can then play the episode.");
+                }
             })
         }
         else{
