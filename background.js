@@ -15,6 +15,9 @@ chrome.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
         console.log("time: ", message);
         const tempYoutubeData = await chrome.storage.local.get("youtubeData");
         if (!tempYoutubeData.youtubeData) tempYoutubeData.youtubeData = [];
+        if(tempYoutubeData.youtubeData.length >= 5) {
+            sendResponse({ error: "Limit Reached" });
+        }
         else tempYoutubeData.youtubeData.forEach((element, idx) => {
             if (element.title === message.title) {
                 tempYoutubeData.youtubeData.pop(idx);

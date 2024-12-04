@@ -41,6 +41,7 @@ function App() {
 
   useEffect(() => {
     console.log("Authorized:", authorized);
+    
   }, [authorized])
   return (
     <>
