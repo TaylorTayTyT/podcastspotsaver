@@ -48,6 +48,7 @@ export default function Youtube({ checkAuthorization }: { checkAuthorization: Fu
 
     useEffect(() => {
         retrieveYoutubeVideosSaved();
+        if (videos.length == 0) SetWarning("go to a YouTube video and click the + button to see it show up here!");
     }, []);
     useEffect(() => {
         if (videos.length == 0) return;

@@ -1,3 +1,9 @@
 .reload{
     cursor: pointer;
 }
+
+.spotifyHeader{
+    text-align: center;
+    border-bottom: solid 1px black;
+    padding-bottom: 0.5rem;
+}

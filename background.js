@@ -1,5 +1,3 @@
-import { response } from "express";
-
 chrome.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
     console.log("Received message:", message);
     function setAccessAndRefreshTokens(data) {
@@ -33,20 +31,7 @@ chrome.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
         // Perform some action
         const env = await fetch("config.json").then((response) => response.json());
 
-        const refresh_token = await chrome.storage.local.get("refresh_token");
-        if (refresh_token.refresh_token) {
-            fetch('https://accounts.spotify.com/api/token', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                    'Authorization': 'Basic ' + btoa(env.CLIENT_ID + ':' + env.CLIENT_SECRET)
-                },
-                body: new URLSearchParams({ grant_type: 'refresh_token', refresh_token: refresh_token.refresh_token, client_id: env.CLIENT_ID }).toString()
-            }).then(response => response.json()).then(data => {
-                setAccessAndRefreshTokens(data);
-            })
-        }
-        else {
+        function authProcess() {
             const state = Math.random().toString(36).substring(2, 15);
             const scope = 'user-library-read user-read-playback-position user-modify-playback-state';
 
@@ -95,10 +80,26 @@ chrome.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
                             // sendResponse({ message: "Success" });
                         })
                         .catch((error) => {
-                            console.error(error);
+                            console.log(error);
                         });
                 });
         }
+
+        const refresh_token = await chrome.storage.local.get("refresh_token");
+        fetch('https://accounts.spotify.com/api/token', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Authorization': 'Basic ' + btoa(env.CLIENT_ID + ':' + env.CLIENT_SECRET)
+            },
+            body: new URLSearchParams({ grant_type: 'refresh_token', refresh_token: refresh_token.refresh_token, client_id: env.CLIENT_ID }).toString()
+        }).then(response => response.json()).then(data => {
+            setAccessAndRefreshTokens(data);
+        })
+            .catch((error) => {
+                authProcess();
+            });
+
     }
 
     if (message.type === "redirect") {
