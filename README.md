@@ -24,6 +24,7 @@ file name: config.json
 
 ## How To Use
 1. When you open the extension, you will default to the authentication page. You need to authenticate before adding podcasts. Click on the authentication button.
+<img src = "podcastspotsaverscreenshot" alt = "podcastspotsaverscreenshot">
 2. You will now be able to access the Youtube and Spotify Tags. To add Youtube videos to the Youtube tab, go on YouTube and click on your desired video. Next to the Youtube
 video's navigation tools, there will a plus icon. Click on the plus icon to add the current Youtube video to the Youtube tab.
 3. On the Spotify panel, your most recent 5 favorited podcasts on Spotify will show up, along with the timestamps. This is automatic. To update this list, favorite your desired podcasts in Spotify. 
