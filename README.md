@@ -3,6 +3,7 @@
 This is a chrome extension to switch listening from Youtube and Spotify. This only works for podcasts.
 
 ## How To Install
+I didn't want to create my own backend server. 
 You will need your own Spotify API key, Spotify Secret, and Youtube API Key. Create a config.json file in the dist root directory that looks the following:
 
 file name: config.json
