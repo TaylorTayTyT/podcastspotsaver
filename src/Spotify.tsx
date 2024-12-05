@@ -22,8 +22,6 @@ export default function Spotify({ value }: { value: string }) {
         })
       
       if(!savedEpisodes) console.log("could not find a corresponding youtube video")
-      console.log("savedEpisodes")
-      console.log(savedEpisodes)
       let savedEpisodesContentArray = savedEpisodes.map((episode: any) => {
         episode = episode.episode;
         if(episode.name == null) return;
@@ -32,7 +30,6 @@ export default function Spotify({ value }: { value: string }) {
         return new SpotifyEpisodeContent(episode.name, episode.resume_point.resume_position_ms, img_url)
       })
       savedEpisodesContentArray = savedEpisodesContentArray.filter((episode : any) => {return episode != undefined});
-      console.log(savedEpisodesContentArray)
       SetEpisodes(savedEpisodesContentArray)
     })
   }
