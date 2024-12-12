@@ -73,14 +73,6 @@ chrome.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
                         .then((response) => response.json())
                         .then(async (data) => {
                             setAccessAndRefreshTokens(data);
-                            // chrome.storage.local.set({ "access_token": data.access_token, "refresh_token": data.refresh_token }, () => {
-                            //     if (chrome.runtime.lastError) {
-                            //       console.error("Error saving data:", chrome.runtime.lastError);
-                            //     } else {
-                            //       console.log("Access and refresh tokens saved successfully!");
-                            //     }
-                            //   });
-                            // sendResponse({ message: "Success" });
                         })
                         .catch((error) => {
                             console.log(error);
@@ -89,6 +81,12 @@ chrome.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
         }
 
         const refresh_token = await chrome.storage.local.get("refresh_token");
+        if(Object.keys(refresh_token).length == 0) {
+            console.log('no refresh')
+            authProcess();
+            return;
+        };
+        console.log(refresh_token)
         fetch('https://accounts.spotify.com/api/token', {
             method: 'POST',
             headers: {
@@ -111,6 +109,8 @@ chrome.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
             v: message.videoId,
             t: message.videoTime
         }
+        if(!(params.v && params.t)) return; 
+        console.log(params)
         const youtubeBaseUrl = "https://www.youtube.com/watch?";
 
         console.log(youtubeBaseUrl + new URLSearchParams(params).toString())

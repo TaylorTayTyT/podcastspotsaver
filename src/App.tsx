@@ -46,7 +46,7 @@ function App() {
   return (
     <>
       <div className="App">
-        Podcast Spot Saver
+        Podcast Spot Save
         <TabContext value={value}>
           <TabList aria-label="navigate media" onChange={(e: any, value: string) => {SetValue(value)}}>
             <Tab label="Auth" value="2" />
@@ -57,7 +57,7 @@ function App() {
           <TabPanel id="authPanel" value="2">
             <Button id="authButton" onClick={() => {
               // redirect to the spoitfy authentication page
-              chrome.runtime.sendMessage({ type: "auth", payload: "Hello, background!" });
+              chrome.runtime.sendMessage({ type: "auth"});
             }}>Authenticate</Button>
             <Lottie animationData={animation} loop autoplay />
             <span style={{ fontSize: "0.5rem" }}>credit to: <a>https://lottiefiles.com/irfanmunawar</a></span>

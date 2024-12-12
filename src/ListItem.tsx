@@ -101,7 +101,10 @@ function ListItem({type, title, time, videos, videoIdx, setWarning}: ListItemCon
             .then((data) => {
                 return data.items;
             })
-
+            if(videos.length == 0) {
+                alert("Sorry, couldn't find a corresponding Youtube video!")
+                return;
+            } 
             const videoIds = videos.map((video: any) => {
                 return video.id.videoId;
             });
@@ -110,8 +113,6 @@ function ListItem({type, title, time, videos, videoIdx, setWarning}: ListItemCon
             
 
             chrome.runtime.sendMessage({ type: "redirect", videoId: firstVideo, videoTime: (time / 1000).toString() });
-
-            console.log(videoIds);
             
         }
     }
